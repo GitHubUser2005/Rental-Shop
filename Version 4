@@ -1,0 +1,67 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox as mbox
+
+root = Tk() # Naming the main window for tkinter
+root.title("Julies Party Hireage Store")  # Giving the window a title
+
+my_tree = ttk.Treeview(root)    # Using a tree view to display data
+my_tree["columns"] = ("Customer Name", "Hired Item", "Number Of Hired Items", "Receipt Number") # Naming all the columns for the different data
+my_tree.column("#0", width=0, stretch=NO)   # Giving proper diemensions to the data
+
+# Columns
+my_tree.column("Customer Name", anchor=W)
+my_tree.column("Hired Item", anchor=W)
+my_tree.column("Number Of Hired Items", anchor=W)
+my_tree.column("Receipt Number", anchor=CENTER)
+
+# Headings
+my_tree.heading("Customer Name", text= "Customer Name", anchor=W)
+my_tree.heading("Hired Item", text="Hired Item", anchor=W)
+my_tree.heading("Number Of Hired Items", text="Number Of Hired Items", anchor=W)
+my_tree.heading("Receipt Number", text="Receipt Number", anchor=CENTER)
+my_tree.grid(padx=10, pady=10)
+
+# Variables
+amount_var = StringVar()
+receipt_var = StringVar()
+
+
+# Adding Frame (For data entry)
+frame = Frame(root)
+frame.grid(pady=10)
+
+# Labels
+customer_label = Label(frame, text="Customer Name")
+hired_item_label = Label(frame, text="Hired Item")
+amount_label = Label(frame, text="Quantity Of Hired Items (Limit 500)")
+receipt_label = Label(frame, text="Receipt Number")
+
+customer_label.grid(row=0, column=0)
+hired_item_label.grid(row=0, column=1)
+amount_label.grid(row=0, column=2)
+receipt_label.grid(row=0, column=3)
+
+# Entry Boxes
+customer_box = Entry(frame)
+hired_item_box = Entry(frame)
+amount_box = Entry(frame, textvariable=amount_var)
+receipt_box = Entry(frame, textvariable=receipt_var)
+
+customer_box.grid(row=1, column=0)
+hired_item_box.grid(row=1, column=1)
+amount_box.grid(row=1, column=2)
+receipt_box.grid(row=1, column=3)
+
+# Buttons
+add_data = Button(frame, text="Add Data", command=add_data)
+delete_data = Button(frame, text="Delete Selected Data", command=delete_selected_data)
+delete_data_all = Button(frame, text="Delete All", command=delete_all_data)
+
+add_data.grid(row=1, column=4)
+delete_data.grid(row=2, column=1)
+delete_data_all.grid(row=2, column=2)
+
+root.update
+root.minsize(root.winfo_width(), root.winfo_height())   # make sure that the window cannot be resized smaller than the widgets
+root.mainloop()                                         # Opens The Tkinter Window

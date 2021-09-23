@@ -1,0 +1,130 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox as mbox
+
+root = Tk() # Naming the main window for tkinter
+root.title("Julies Party Hireage Store")  # Giving the window a title
+
+my_tree = ttk.Treeview(root)    # Using a tree view to display data
+my_tree["columns"] = ("Customer Name", "Hired Item", "Number Of Hired Items", "Receipt Number") # Naming all the columns for the different data
+my_tree.column("#0", width=0, stretch=NO)   # Giving proper diemensions to the data
+
+# Columns
+my_tree.column("Customer Name", anchor=W)
+my_tree.column("Hired Item", anchor=W)
+my_tree.column("Number Of Hired Items", anchor=W)
+my_tree.column("Receipt Number", anchor=CENTER)
+
+# Headings
+my_tree.heading("Customer Name", text= "Customer Name", anchor=W)
+my_tree.heading("Hired Item", text="Hired Item", anchor=W)
+my_tree.heading("Number Of Hired Items", text="Number Of Hired Items", anchor=W)
+my_tree.heading("Receipt Number", text="Receipt Number", anchor=CENTER)
+my_tree.grid(padx=10, pady=10)
+
+# Variables
+amount_var = StringVar()
+receipt_var = StringVar()
+
+# Functions
+def delete_selected_data():
+    x = my_tree.selection()[0]
+    my_tree.delete(x)
+
+def delete_all_data():
+    for x in my_tree.get_children():
+        my_tree.delete(x)
+
+def add_data():
+    count=0
+    for x in my_tree.get_children():
+        count+=1
+    int_check = amount_var.get()
+    int_check2 = receipt_var.get()
+    # If Statements
+    if len(customer_box.get()) == 0 and len(hired_item_box.get()) == 0 and len(amount_box.get()) == 0 and len(receipt_box.get()) == 0:
+        mbox.showerror(title="Empty Box Error", message="Fill Out All The Boxes")
+        print("Empty Boxes Error")
+        return(add_data)
+    if len(customer_box.get()) == 0:
+        mbox.showerror(title="Customer Box Error", message="Fill Out The Customer Box")
+        print("Empty Customer Box Error")
+        return(add_data)
+    if len(hired_item_box.get()) == 0:
+        mbox.showerror(title="Hired Item Error", message="Fill Out The Hired Item Box")
+        print("Empty Hired Items Error")
+        return(add_data)
+    if len(amount_box.get()) == 0:
+        mbox.showerror(title="Amount Error", message="Fill Out The Number Of Hired Items Box")
+        print("Empty Number Of Hired Items Error")
+        return(add_data)
+    if len(receipt_box.get()) == 0:
+        mbox.showerror(title="Receipt Box Error", message="Fill Out The Receipt Number Box")
+        print("Empty Receipt Box Error")
+        return(add_data)
+    if amount_box.get() == "0":      # Hired Items Quantity 1
+        mbox.showerror(title="Quantity Eror", message="Hire 1 Or More Items")
+        print("Hired Quantity Error")
+        return(add_data)
+    try:
+        int_check = int(int_check)
+    except:
+        mbox.showerror(title="Integer Error", message="Only Integers In 'Quantity Of Hired Items' Box")
+        print("Number Of Hired Items Int Error")
+        return(add_data)
+    try:
+        int_check2 = int(int_check2)
+    except:
+        mbox.showerror(title="Integer Error", message="Only Integers In 'Receipt Number' Box")
+        print("Receipt Int Error")
+        return(add_data)
+
+    if amount_box.get() > str(500):     # Hired Items Quantity 2
+        mbox.showerror(title="Exceeded Hiring Quantity", message="Maximum Quantity Of Hired Items Is 500")
+        print("Exceeded Hired Quantity Error")
+        return(add_data)
+    else:    
+        my_tree.insert(parent="", index="end", iid=count ,text="", values=(customer_box.get(),hired_item_box.get(), amount_box.get(), receipt_box.get()))
+        customer_box.delete(0,END)
+        hired_item_box.delete(0,END)
+        amount_box.delete(0,END)
+        receipt_box.delete(0,END)
+
+# Adding Frame (For data entry)
+frame = Frame(root)
+frame.grid(pady=10)
+
+# Labels
+customer_label = Label(frame, text="Customer Name")
+hired_item_label = Label(frame, text="Hired Item")
+amount_label = Label(frame, text="Quantity Of Hired Items (Limit 500)")
+receipt_label = Label(frame, text="Receipt Number")
+
+customer_label.grid(row=0, column=0)
+hired_item_label.grid(row=0, column=1)
+amount_label.grid(row=0, column=2)
+receipt_label.grid(row=0, column=3)
+
+# Entry Boxes
+customer_box = Entry(frame)
+hired_item_box = Entry(frame)
+amount_box = Entry(frame, textvariable=amount_var)
+receipt_box = Entry(frame, textvariable=receipt_var)
+
+customer_box.grid(row=1, column=0)
+hired_item_box.grid(row=1, column=1)
+amount_box.grid(row=1, column=2)
+receipt_box.grid(row=1, column=3)
+
+# Buttons
+add_data = Button(frame, text="Add Data", command=add_data)
+delete_data = Button(frame, text="Delete Selected Data", command=delete_selected_data)
+delete_data_all = Button(frame, text="Delete All", command=delete_all_data)
+
+add_data.grid(row=1, column=4)
+delete_data.grid(row=2, column=1)
+delete_data_all.grid(row=2, column=2)
+
+root.update
+root.minsize(root.winfo_width(), root.winfo_height())   # make sure that the window cannot be resized smaller than the widgets
+root.mainloop()                                         # Opens The Tkinter Window

@@ -26,6 +26,15 @@ my_tree.grid(padx=10, pady=10)
 amount_var = StringVar()
 receipt_var = StringVar()
 
+# Functions
+def add_data():
+    print()
+
+def delete_selected_data():
+    print()
+
+def delete_all_data():
+    print()
 
 # Adding Frame (For data entry)
 frame = Frame(root)
@@ -64,4 +73,4 @@ delete_data_all.grid(row=2, column=2)
 
 root.update
 root.minsize(root.winfo_width(), root.winfo_height())   # make sure that the window cannot be resized smaller than the widgets
-root.mainloop()                                         # Opens The Tkinter Window
+root.mainloop()   

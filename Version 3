@@ -1,0 +1,44 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox as mbox
+
+root = Tk() # Naming the main window for tkinter
+root.title("Julies Party Hireage Store")  # Giving the window a title
+
+my_tree = ttk.Treeview(root)    # Using a tree view to display data
+my_tree["columns"] = ("Customer Name", "Hired Item", "Number Of Hired Items", "Receipt Number") # Naming all the columns for the different data
+my_tree.column("#0", width=0, stretch=NO)   # Giving proper diemensions to the data
+
+# Columns
+my_tree.column("Customer Name", anchor=W)
+my_tree.column("Hired Item", anchor=W)
+my_tree.column("Number Of Hired Items", anchor=W)
+my_tree.column("Receipt Number", anchor=CENTER)
+
+# Headings
+my_tree.heading("Customer Name", text= "Customer Name", anchor=W)
+my_tree.heading("Hired Item", text="Hired Item", anchor=W)
+my_tree.heading("Number Of Hired Items", text="Number Of Hired Items", anchor=W)
+my_tree.heading("Receipt Number", text="Receipt Number", anchor=CENTER)
+my_tree.grid(padx=10, pady=10)
+
+# Variables
+amount_var = StringVar()
+receipt_var = StringVar()
+
+# Adding Frame (For data entry)
+frame = Frame(root)
+frame.grid(pady=10)
+
+# Labels
+customer_label = Label(frame, text="Customer Name")
+hired_item_label = Label(frame, text="Hired Item")
+amount_label = Label(frame, text="Quantity Of Hired Items (Limit 500)")
+receipt_label = Label(frame, text="Receipt Number")
+
+customer_label.grid(row=0, column=0)
+hired_item_label.grid(row=0, column=1)
+amount_label.grid(row=0, column=2)
+receipt_label.grid(row=0, column=3)
+
+root.mainloop()

@@ -24,6 +24,10 @@ my_tree.heading("Number Of Hired Items", text="Number Of Hired Items", anchor=W)
 my_tree.heading("Receipt Number", text="Receipt Number", anchor=CENTER)
 my_tree.pack(pady=20)
 
+# Functions
+def add_data():
+    print()
+
 # Adding Frame (For data entry)
 frame = Frame(root)
 frame.pack(pady=20)

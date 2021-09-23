@@ -1,0 +1,26 @@
+from tkinter import *
+from tkinter import ttk
+
+root = Tk() # Naming the main window for tkinter
+root.title("man tkinter giving me aids, back to html and css")  # Giving the window a title
+root.geometry("1280x720")
+
+my_tree = ttk.Treeview(root)    # Using a tree view to display data
+
+my_tree["columns"] = ("Customer Name", "Hired Item", "Number Of Hired Items", "Receipt Number") # Naming all the columns for the different data
+
+my_tree.column("#0", width=0, stretch=NO)   # Giving proper diemensions to the data
+
+# Columns
+my_tree.column("Customer Name", anchor=W)
+my_tree.column("Hired Item", anchor=W)
+my_tree.column("Number Of Hired Items", anchor=W)
+my_tree.column("Receipt Number", anchor=CENTER)
+
+# Headings
+my_tree.heading("Customer Name", text= "Customer Name", anchor=W)
+my_tree.heading("Hired Item", text="Hired Item", anchor=W)
+my_tree.heading("Number Of Hired Items", text="Number Of Hired Items", anchor=W)
+my_tree.heading("Receipt Number", text="Receipt Number", anchor=CENTER)
+my_tree.pack(pady=20)
+root.mainloop()

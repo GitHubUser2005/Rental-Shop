@@ -36,6 +36,17 @@ hired_item_label = Label(frame, text="Hired Item")
 amount_label = Label(frame, text="Quantity Of Hired Items (Limit 500)")
 receipt_label = Label(frame, text="Receipt Number")
 
+# Entry Boxes
+customer_box = Entry(frame)
+hired_item_box = Entry(frame)
+amount_box = Entry(frame, textvariable=amount_var)
+receipt_box = Entry(frame, textvariable=receipt_var)
+
+customer_box.grid(row=1, column=0)
+hired_item_box.grid(row=1, column=1)
+amount_box.grid(row=1, column=2)
+receipt_box.grid(row=1, column=3)
+
 customer_label.grid(row=0, column=0)
 hired_item_label.grid(row=0, column=1)
 amount_label.grid(row=0, column=2)
